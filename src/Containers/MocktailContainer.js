@@ -1,22 +1,17 @@
 import React from 'react'
+import MocktailCard from '../Components/MocktailCard'
 
-class MocktailContainer extends React.Component {
+const MocktailContainer = (props) => {
 
-    renderNotes = () => {
-        return this.props.mocktailArray.map(mocktail => {
-            return (
-                <div>
-                    <p>Mocktail Name: {mocktail.name} </p>
-                    <img alt={mocktail.name} src={mocktail.image} />
-                </div>)
-        })
-    }
-    render() {
-        console.log(this.props)
         return (
-            <div>{this.renderNotes()}</div>
+            <li className="mocktail-container">
+                {props.mocktailArray.map((mocktail) => {
+                    return (
+                        <MocktailCard key={mocktail.id} mocktail={mocktail} />
+                    )
+                })}
+            </li>
         )
-    }
 }
 
 export default MocktailContainer

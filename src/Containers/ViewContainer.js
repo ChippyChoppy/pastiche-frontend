@@ -5,6 +5,7 @@ class ViewContainer extends React.Component {
 
     state = {
         arrayOfMocktails: [],
+        selectedCard: {},
         searchValue: ""
     }
     componentDidMount() {
@@ -26,9 +27,17 @@ class ViewContainer extends React.Component {
         }
     }
 
+    // cardClickHandler = (mocktailObject) => {
+    //     this.setState({ selectedCard: mocktailObject, cardBeenClicked: !this.state.cardBeenClicked })
+    // }
+
+    favClickHandler = (mocktailObject) => {
+        this.setState({ selectedCard: mocktailObject, favBeenClicked: !this.state.favBeenClicked })
+    }
+
     render() {
         return (
-            <div>
+            <div className="view-container">
                 <MocktailContainer mocktailArray={this.filterMocktails()} />
             </div>
         )
