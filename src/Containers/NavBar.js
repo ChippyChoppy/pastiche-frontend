@@ -1,5 +1,6 @@
 import React from 'react'
 
+// look into NavLink documentation for this
 const NavBar = () => {
     return (
         <div>

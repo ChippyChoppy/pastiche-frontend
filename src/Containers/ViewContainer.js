@@ -5,6 +5,7 @@ class ViewContainer extends React.Component {
 
     state = {
         arrayOfMocktails: [],
+        userMocktails: [],
         selectedCard: {},
         searchValue: ""
     }
@@ -17,6 +18,8 @@ class ViewContainer extends React.Component {
                 console.log(this.state)
             })
     }
+
+
     filterMocktails = () => {
         let filteredMocktails = [...this.state.arrayOfMocktails]
         if (this.state.searchValue !== "") {
@@ -25,6 +28,12 @@ class ViewContainer extends React.Component {
         } else {
             return filteredMocktails
         }
+    }
+
+    rAndDMocktails = () => {
+        let rAndDMocktails = []
+        rAndDMocktails = this.state.arrayOfMocktails.filter(mocktail => mocktail.userMocktails.r_and_d === true)
+        return rAndDMocktails
     }
 
     // cardClickHandler = (mocktailObject) => {
