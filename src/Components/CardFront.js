@@ -3,7 +3,7 @@ import React from 'react'
 class CardFront extends React.Component {
 
     renderCardFront = () => {
-        // console.log(this.props.mocktailObject)
+        // console.log(this.props)
             return (
                 <div className="card-front" onClick={this.localClickHandler}>
                     <img className="mocktail-img" alt={this.props.mocktailObject.name} src={this.props.mocktailObject.image} />

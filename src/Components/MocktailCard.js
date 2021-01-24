@@ -14,6 +14,7 @@ class MocktailCard extends React.Component {
                     beenClicked={this.state}
                     cardClickHandler={this.cardClickHandler}
                     mocktailObject={this.props.mocktail}
+                    mockIngredArray={this.props.mockIngredArray}
                 />
             )
         } else {
