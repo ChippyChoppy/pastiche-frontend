@@ -1,6 +1,7 @@
 import React from 'react'
 import MocktailContainer from './MocktailContainer'
 import MyContainer from './MyContainer'
+import styled from 'styled-components'
 
 class ViewContainer extends React.Component {
 
@@ -10,6 +11,7 @@ class ViewContainer extends React.Component {
         ingredientArray: [],
         measurementArray: [],
         tagsArray: [],
+        userArray: [],
         selectedCard: {},
         searchValue: ""
     }
@@ -41,6 +43,11 @@ class ViewContainer extends React.Component {
             .then(response => response.json())
             .then(tag => {
                 this.setState({ tagsArray: tag })
+            })
+        fetch('http://localhost:3000/api/v1/users')
+            .then(response => response.json())
+            .then(user => {
+                this.setState({ userArray: user})
             })
     }
 
@@ -91,12 +98,19 @@ class ViewContainer extends React.Component {
 
     render() {
         return (
-            <div className="view-container">
+            <Wrapper className="view-container">
+                <MyContainer createMocktailHandler={this.createMocktailHandler} ingredientArray={this.state.ingredientArray} measurementArray={this.state.measurementArray} tagArray={this.state.tagsArray} userArray={this.state.userArray} />
                 <MocktailContainer mocktailArray={this.filterMocktails()} mockIngredArray={this.state.mockIngredArray} />
-                <MyContainer createMocktailHandler={this.createMocktailHandler} ingredientArray={this.state.ingredientArray} measurementArray={this.state.measurementArray} tagArray={this.state.tagsArray} />
-            </div>
+                
+            </Wrapper>
         )
     }
 }
 
 export default ViewContainer
+
+const Wrapper = styled.div `
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+`;

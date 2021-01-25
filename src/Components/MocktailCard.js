@@ -1,6 +1,7 @@
 import React from 'react'
 import CardFront from './CardFront'
 import CardBack from './CardBack'
+import styled from 'styled-components'
 
 class MocktailCard extends React.Component {
     state = {
@@ -39,12 +40,25 @@ class MocktailCard extends React.Component {
     render() {
         // console.log(this.props)
         return (
-            <div className="mocktail-card" >
+            <Card className="mocktail-card" >
                 {this.renderMocktailCard()}
-            </div>
+            </Card>
 
         )
     }
 }
 
 export default MocktailCard
+
+const Card = styled.div`
+    display: inline;
+    justify-content: space-evenly;
+    padding: 15px 15px;
+    margin: 10px 0px;
+    text-align: left;
+    color: black;
+    border-radius: 0px;
+    border: 3px solid #dddd22;
+    width: 40%;
+    background: lightgrey;
+`

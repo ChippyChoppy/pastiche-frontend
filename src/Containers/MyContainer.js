@@ -1,17 +1,25 @@
 import React from 'react'
 import NewMocktailForm from '../Components/NewMocktailForm'
+import ProfileSidebar from './ProfileSidebar'
+import styled from 'styled-components'
 
 const MyContainer = (props) => {
     {/* <RandDCard key={mocktail.id} mocktail={mocktail} /> */ }
     console.log(props)
 
     return (
-        <div className="mocktail-container">
-            return (
+        <Wrapper className="mocktail-container">
+                <ProfileSidebar userArray={props.userArray} />
+                <br/>
                 <NewMocktailForm createMocktailHandler={props.createMocktailHandler} ingredientArray={props.ingredientArray} measurementArray={props.measurementArray} tagArray={props.tagArray} />
-            )
-        </div>
+        </Wrapper>
     )
 }
 
 export default MyContainer
+
+const Wrapper = styled.div `
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+`;

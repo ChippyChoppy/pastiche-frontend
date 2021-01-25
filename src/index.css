@@ -17,29 +17,3 @@ div.view-container {
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
-
-div.mocktail-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-}
-
-div.card {
-  display: inline;
-  justify-content: space-evenly;
-  padding: 15px 15px;
-  margin: 10px 0px;
-  text-align: left;
-  color: black;
-  border-radius: 0px;
-  border: 3px solid #dddd22;
-  width: 40%;
-}
-
-img.mocktail-img {
-  object-fit: fill;
-max-width: 95%;
-max-height: 275px; 
-border: 3px solid #f819ae;
-justify-content: center;
-}
