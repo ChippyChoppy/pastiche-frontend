@@ -185,7 +185,9 @@ render() {
             <FormLabel>
                 Ingredients: 
                     <br />
-                <select name="measurementId" onChange={this.mockIngredChangeHandler} >
+                <select 
+                    name="measurementId" 
+                    onChange={this.mockIngredChangeHandler} >
                     {this.renderMeasurementList()}
                 </select>
                 <select

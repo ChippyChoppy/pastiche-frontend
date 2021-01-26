@@ -13,6 +13,7 @@ class ViewContainer extends React.Component {
         measurementArray: [],
         tagsArray: [],
         userArray: [],
+        notesArray: [],
         mocktailObject: {},
     }
 
@@ -23,13 +24,11 @@ class ViewContainer extends React.Component {
                 this.setState({ arrayOfMocktails: allMocktails })
                 console.log(this.state.arrayOfMocktails)
             })
-            // .then(allMocktails => {
-            //     let mockTags = []
-            //     mockTags = allMocktails.map((mocktail) => {
-            //         return mocktail.mock_tags
-            //     })
-            //     this.setState({ mockTagArray: allMocktails.mock_tags})
-            // })
+        fetch('http://localhost:3000/api/v1/notes')
+            .then(response => response.json())
+            .then(allNotes => {
+                this.setState({ notesArray: allNotes})
+            })
         fetch('http://localhost:3000/api/v1/ingredients')
             .then(response => response.json())
             .then(allIngredients => {
@@ -85,23 +84,23 @@ class ViewContainer extends React.Component {
             // })
     }
 
-    createMockIngredHandler(mockIngredObject) {
-        fetch('http://localhost:3000/api/v1/mock_ingreds', {
+    createNoteHandler(noteObject) {
+        fetch('http://localhost:3000/api/v1/notes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accepts': 'application/json'
             },
-            body: JSON.stringify(mockIngredObject)
+            body: JSON.stringify(noteObject)
         })
             .then(response => response.json())
-            .then(newMockIngredObject => {
-                this.setState({ mockIngredArray: [...this.state.mockIngredArray, newMockIngredObject] })
+            .then(newNoteObject => {
+                this.setState({ notesArray: [...this.state.notesArray, newNoteObject] })
             })
     }
 
     filterMocktails = () => {
-        console.log(this.state.arrayOfMocktails[0])
+        console.log(this.state.arrayOfMocktails)
         let filteredMocktails = [...this.state.arrayOfMocktails]
         if (this.props.searchValue !== "") {
             filteredMocktails = filteredMocktails.filter(mocktail => mocktail.name.toLowerCase().includes(this.props.searchValue.toLowerCase()) 
@@ -121,7 +120,7 @@ class ViewContainer extends React.Component {
         console.log(this.state.userArray)
         return (
             <Wrapper className="view-container">
-                <MocktailContainer mocktailArray={this.filterMocktails()} mockIngredArray={this.state.mockIngredArray} />
+                <MocktailContainer usersArray={this.state.userArray} mocktailArray={this.filterMocktails()} mockIngredArray={this.state.mockIngredArray} submitHandler={this.createNoteHandler} />
                 <MyContainer createMocktailHandler={this.createMocktailHandler} ingredientArray={this.state.ingredientArray} measurementArray={this.state.measurementArray} tagArray={this.state.tagsArray} userArray={this.state.userArray} mocktailObject={this.state.mocktailObject} />
             </Wrapper>
         )

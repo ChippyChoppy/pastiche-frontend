@@ -10,7 +10,7 @@ const MocktailContainer = (props) => {
         <MockContainer className="mocktail-container">
             {props.mocktailArray.map((mocktail) => {
                 return (
-                    <MocktailCard key={mocktail.id} mocktail={mocktail} mockIngredArray={props.mockIngredArray} />
+                    <MocktailCard key={mocktail.id} mocktail={mocktail} usersArray={props.usersArray} mockIngredArray={props.mockIngredArray} submitHandler={props.submitHandler} />
                 )
             })}
         </MockContainer>

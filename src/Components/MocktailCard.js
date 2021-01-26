@@ -13,10 +13,10 @@ class MocktailCard extends React.Component {
     renderMocktailCard = () => {
         if (this.state.hover && this.state.beenClicked) {
             return (
-                <CardNote 
+                <CardNote
                     cardClickHandler={this.cardClickHandler} />
             )
-        } 
+        }
         if (this.state.hover && !this.state.beenClicked) {
             return (
                 <CardBack
@@ -26,10 +26,12 @@ class MocktailCard extends React.Component {
                     mockIngredArray={this.props.mockIngredArray}
                 />
             )
-        } 
+        }
         else {
             return (
                 <CardFront
+                    onMouseEnter={() => this.setState({ hover: true })}
+                    hover={this.state.hover}
                     beenClicked={this.state.beenClicked}
                     cardClickHandler={this.cardClickHandler}
                     mocktailObject={this.props.mocktail}
@@ -47,15 +49,19 @@ class MocktailCard extends React.Component {
     // }
 
     render() {
-        // console.log(this.props)
+        console.log(this.props.usersArray)
         return (
-            <Card
-                onMouseEnter={() => this.setState({hover: true})} 
-                onMouseLeave={() => this.setState({beenClicked: false, hover: false})}
-                onClick={this.cardClickHandler}
-                className="mocktail-card" >
-                {this.renderMocktailCard()}
-            </Card>
+            <>
+                <Card
+                    // onMouseEnter={() => this.setState({hover: true})} 
+                    onMouseLeave={() => this.setState({ beenClicked: false, hover: false })}
+                    onClick={this.cardClickHandler}
+                    className="mocktail-card" >
+                    {this.renderMocktailCard()}
+                </Card>
+                <CardNote submitHandler={this.props.submitHandler}/>
+            </>
+
 
         )
     }
@@ -75,6 +81,7 @@ const Card = styled.div`
     width: 25%;
     background: #480a1b;
     color: #fefbfa;
+    transition: all 0.5s ease-in-out 0s;
     :hover {
         border-style: outset;
     }

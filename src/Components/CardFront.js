@@ -1,30 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
+import Rating from 'react-rating'
 
 class CardFront extends React.Component {
 
     renderCardFront = () => {
         // console.log(this.props)
         return (
-            <div className="card-front" onClick={this.localClickHandler}>
-                <Image className="mocktail-img" alt={this.props.mocktailObject.name} src={this.props.mocktailObject.image} />
-                <h3>{this.props.mocktailObject.name}</h3>
-                {this.props.mocktailObject.tags.map((mockTag) => { return <button>{mockTag.tag}</button> })}
-                <p>{this.props.mocktailObject.rating}</p>
+            <div className="card-front" onClick={this.localClickHandler} >
+                <div>
+                    <Image className="mocktail-img" alt={this.props.mocktailObject.name} src={this.props.mocktailObject.image} onMouseEnter={this.props.onMouseEnter} />
+                    <h3>{this.props.mocktailObject.name}</h3>
+                    {this.props.mocktailObject.tags.map((mockTag) => { return <button>{mockTag.tag}</button> })}
+                </div>
+                <div>
+                    <Rating
+                        initialRating={this.props.mocktailObject.rating}
+                    />
+                </div>
             </div>
         )
     }
 
-    // renderTags = () => {
-    //     this.props.mocktailObject.tags.map((mockTag) => {return <button>{mockTag.tag}</button>})
-    // }
     localClickHandler = () => {
-        // console.log("clicked")
         this.props.cardClickHandler()
     }
 
     render() {
-        // console.log("props in CardFront", this.props.mocktailObject.tags)
         return (
             <div>{this.renderCardFront()}</div>
         )
@@ -32,7 +34,7 @@ class CardFront extends React.Component {
 }
 export default CardFront
 
-const CardDiv = styled.div `
+const CardDiv = styled.div`
     
 `
 
