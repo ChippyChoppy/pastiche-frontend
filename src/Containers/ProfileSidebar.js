@@ -25,8 +25,14 @@ const ProfileSidebar = (props) => {
 
 export default ProfileSidebar
 
-const SideBar = styled.div `
+const SideBar = styled.ul `
     width: 20%;
+    background: #d9919a;
+    color: #fefbfa;
+    border-radius: 8px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 `;
 
 

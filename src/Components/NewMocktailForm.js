@@ -1,32 +1,49 @@
-import React from 'react'
+import React from 'react'   
+import styled from 'styled-components'
 
 class NewMocktailForm extends React.Component {
 
     state = {
         name: "",
+        creator: "",
         image: "",
         glassware: "",
         instructions: "",
         creator: "",
-        ingredientNumber: 0,
-        r_and_d: true,
-        mock_tags: [{
-            tag: ""
+        // ingredientNumber: 0,
+        rAndD: true,
+        mockTags: [{
+            mocktailId: null,
+            tagId: ""
         }],
-        mock_ingreds: [{
-            mocktail_id: null,
-            measurement_id: "",
-            ingredient_id: ""
-        }],
-        users_mocktails: [{
-            mocktail_id: null,
-            user_id: "",
-        }]
+        mockIngreds: {
+            measurementId: "",
+            ingredientId: ""
+        },
+        usersMocktails: {
+            userId: "",
+        }
     }
 
     changeHandler = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
+    
+    mockIngredChangeHandler = (e) => {
+        this.setState({ mockIngreds: {...this.state.mockIngreds, [e.target.name]: e.target.value} })
+    }
+
+    // mockMeasureChangeHandler = (e) => {
+    //     this.setState({ mockIngreds:{[e.target.name]: e.target.value} })
+    // }
+
+
+
+    submitHandler = (e) => {
+        e.preventDefault()
+        this.props.submitHandler(this.state)
+    }
+    
     renderMeasurementList = () => {
         return (
             this.props.measurementArray.map((measurement) => {
@@ -34,8 +51,9 @@ class NewMocktailForm extends React.Component {
                     <option
                         key={measurement.id}
                         type=""
-                        name="mock_ingred.measurement_id"
-                        value={this.state.mock_ingreds.measurement_id}>
+                        name="mockIngreds.measurementId"
+                        // placeholder="imperial/metric"
+                        value={measurement.id}>
                         {measurement.imperial} / {measurement.metric}
                     </option>
                 )
@@ -50,8 +68,9 @@ class NewMocktailForm extends React.Component {
                     <option
                         key={ingredient.id}
                         type=""
-                        name="mock_ingred.intredient_id"
-                        value={this.state.mock_ingreds.ingredient_id}>
+                        name="mockIngreds.ingredientId"
+                        // placeholder="Ingredient"
+                        value={ingredient.id}>
                         {ingredient.name}
                     </option>
                 )
@@ -62,14 +81,24 @@ class NewMocktailForm extends React.Component {
     renderTags = () => {
         return (
             this.props.tagArray.map((tag) => {
-                return <button>{tag.tag}</button>
+                return (
+                    <FormButton 
+                        onClick=""
+                        key={tag.id}
+                        type=""
+                        name="mockTag.tagId"
+                        value={tag.tag}>
+                        {tag.tag}
+                     </FormButton>
+                )
+                
             })
         )
     }
 
-    addIngredient = () => {
-        this.setState({ ingredientNumber: this.state.ingredientNumber + 1 })
-    }
+    // addIngredient = () => {
+    //     this.setState({ ingredientNumber: this.state.ingredientNumber + 1 })
+    // }
     // renderMoreIngreds = () => {
     //     let mock_ingreds = []
     //     for (let i = 0; i <= this.state.ingredientNumber; i++) {
@@ -106,74 +135,155 @@ class NewMocktailForm extends React.Component {
     }
 
 render() {
-    console.log(this.state.mock_ingreds)
+    console.log(this.state)
     return (
-        <div>
-        <h2>Submit a new Mocktail</h2>
-           <form onSubmit={this.handleSubmit}>
-            <label>
-                Name:
-                    <input
+        <FormWrapper>
+        <CreateDiv>        
+            <h2>Submit a new Mocktail</h2>
+        </CreateDiv>
+           <TheFormItself onSubmit={this.submitHandler}>
+            <FormLabel>
+                Name: <br/>
+                    <FormInput
                     type="text"
                     name="name"
                     placeholder="mocktail name"
                     value={this.state.name}
                     onChange={this.changeHandler} />
-            </label>
+            </FormLabel>
             <br />
-            <label>
-                Image:
-                    <input
+            <FormLabel>
+                Created by: <br/>
+                    <FormInput
+                    type="text"
+                    name="creator"
+                    placeholder="creator name"
+                    value={this.state.creator}
+                    onChange={this.changeHandler} />
+            </FormLabel>
+            <br />
+            <FormLabel>
+                Image: <br/>
+                    <FormInput
                     type="text"
                     name="image"
                     placeholder="image url"
                     value={this.state.image}
                     onChange={this.changeHandler} />
-            </label>
+            </FormLabel>
             <br />
-            <label>
-                Glassware:
-                    <input
+            <FormLabel>
+                Glassware: <br/>
+                    <FormInput
                     type="text"
                     name="glassware"
                     placeholder="serving glass"
                     value={this.state.glassware}
                     onChange={this.changeHandler} />
-            </label>
+            </FormLabel>
             <br />
-            <label>
-                Ingredients:
+            <FormLabel>
+                Ingredients: 
                     <br />
-                <select
-                    value={this.state.value}
-                    onChange={this.changeHandler} >
+                <select name="measurementId" onChange={this.mockIngredChangeHandler} >
                     {this.renderMeasurementList()}
                 </select>
                 <select
-                    value={this.state.value}
-                    onChange={this.changeHandler}>
+                    name="ingredientId"
+                    onChange={this.mockIngredChangeHandler}>
                     {this.renderIngredientList()}
                 </select>
-            </label>
-
-            <button onClick={this.renderMoreIngreds}>+ This button should render another measurement/ingredient dropdown+</button>
+                <FormButton onClick={()=> this.renderMoreIngreds}>+ This button should render another measurement/ingredient dropdown+</FormButton>
+            </FormLabel>
             <br />
-            <label>
-                Instructions:
-                    <textarea type="text" value={this.state.instructions} onChange={this.changeHandler} />
-            </label>
+            <FormLabel>
+                Instructions: <br/>
+                    <TextArea 
+                        type="text" 
+                        name="instructions"
+                        placeholder="tell me how to make this"
+                        value={this.state.instructions} 
+                        onChange={this.changeHandler} />
+            </FormLabel>
             <br />
-            <label>Tag:
+            <FormLabel>Tag: 
                     <br />
                 {this.renderTags()}
-            </label>
+            </FormLabel>
             <br />
-            <input type="submit" value="Submit" />
-        </form> 
-        </div>
+            <FormInput type="submit" value="Submit" />
+        </TheFormItself> 
+        </FormWrapper>
         
     )
 }
 }
 
 export default NewMocktailForm
+
+const FormWrapper = styled.div `
+    width: 70%;
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid #fec196;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`
+
+const CreateDiv = styled.div `
+    width: 80%
+`
+
+const TheFormItself = styled.form `
+    border: 5px solid: #d9919a;
+    padding: 5px;
+`
+
+const TextArea = styled.textarea `
+width: 35%;
+height: 150px;
+padding: 12px 20px;
+box-sizing: border-box;
+border: 5px solid #d9919a;
+border-radius: 8px;
+border-style: inset;
+background-color: #fefbfa;
+resize: auto;
+`
+
+const FormInput = styled.input `
+    flex-basis: auto;
+    width: 35%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 5px solid #d9919a;
+    border-radius: 8px;
+    border-style: inset;
+    background-color: #fefbfa;
+    :focus {
+        background-color: #480a1b;
+        color: #fefbfa;
+        border: 5px solid #fec196;
+        border-style: inset;
+    }
+`
+const FormLabel = styled.label `
+    
+`
+
+const FormButton = styled.button `
+    background-color: #fec196;
+    border: 3px solid #d9919a;
+    margin: 5px;
+    border-radius: 8px;
+    border-style: outset;
+    padding: 8px;
+    :hover {
+        background-color: #d9919a;
+        border: 3px solid #fec196;
+        border-style: inset;
+    }
+
+`

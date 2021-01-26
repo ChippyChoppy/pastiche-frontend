@@ -11,7 +11,7 @@ const MyContainer = (props) => {
         <Wrapper className="mocktail-container">
                 <ProfileSidebar userArray={props.userArray} />
                 <br/>
-                <NewMocktailForm createMocktailHandler={props.createMocktailHandler} ingredientArray={props.ingredientArray} measurementArray={props.measurementArray} tagArray={props.tagArray} />
+                <NewMocktailForm submitHandler={props.createMocktailHandler} ingredientArray={props.ingredientArray} measurementArray={props.measurementArray} tagArray={props.tagArray} mocktailObject={props.mocktailObject} />
         </Wrapper>
     )
 }

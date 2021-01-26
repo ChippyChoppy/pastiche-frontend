@@ -6,13 +6,13 @@ class UserProfile extends React.Component {
     renderUserProfile = () => {
         return (
             <Profile>
-                <h3>{this.props.user.first_name}</h3>
+                <li>{this.props.user.first_name}</li>
                 <ProfileImage alt={this.props.user.first_name} src={this.props.user.image} />
-                <p>
+                <li>
                     About: 
                     <br/>
                     {this.props.user.bio}
-                </p>
+                </li>
             </Profile>
 
         )
@@ -34,14 +34,25 @@ const ProfileWrapper = styled.div `
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    padding: 15px;
+
 `
 
-const Profile = styled.div `
+const ProfileList = styled.li `
+display: block;
+width: 20%;
+`
+
+const Profile = styled.ul `
     width: 100%;
-    background: pink;
+    padding: 15px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 `
 
 const ProfileImage = styled.img `
-    height: 150px;
+    max-height: 175px;
     object-fit: contain;
+    justify-content: center;
 `

@@ -21,8 +21,10 @@ export default MocktailContainer
 
 const MockContainer = styled.div `
     display: flex;
-    flex-flow; row wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
+    align-content: space-around;
 `;
 
 

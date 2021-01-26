@@ -8,12 +8,12 @@ class ViewContainer extends React.Component {
     state = {
         arrayOfMocktails: [],
         mockIngredArray: [],
+        mockTagArray: [],
         ingredientArray: [],
         measurementArray: [],
         tagsArray: [],
         userArray: [],
-        selectedCard: {},
-        searchValue: ""
+        mocktailObject: {},
     }
 
     componentDidMount() {
@@ -21,7 +21,15 @@ class ViewContainer extends React.Component {
             .then(response => response.json())
             .then(allMocktails => {
                 this.setState({ arrayOfMocktails: allMocktails })
+                console.log(this.state.arrayOfMocktails)
             })
+            // .then(allMocktails => {
+            //     let mockTags = []
+            //     mockTags = allMocktails.map((mocktail) => {
+            //         return mocktail.mock_tags
+            //     })
+            //     this.setState({ mockTagArray: allMocktails.mock_tags})
+            // })
         fetch('http://localhost:3000/api/v1/ingredients')
             .then(response => response.json())
             .then(allIngredients => {
@@ -52,6 +60,7 @@ class ViewContainer extends React.Component {
     }
 
     createMocktailHandler(mocktailObject) {
+        console.log(mocktailObject)
         fetch('http://localhost:3000/api/v1/mocktails', {
             method: 'POST',
             headers: {
@@ -62,8 +71,18 @@ class ViewContainer extends React.Component {
         })
             .then(response => response.json())
             .then(newMocktailObject => {
+                console.log(newMocktailObject)
                 this.setState({ arrayOfMocktails: [...this.state.arrayOfMocktails, newMocktailObject] })
             })
+            // .then(newMocktailObject => {
+            //     newMocktailObject.ingredi
+            // })
+            // .then(newMockIngredObject => {
+            //     this.setState({ mockIngredArray: [...this.state.mockIngredArray, newMockIngredObject.mock_ingreds] })
+            // })
+            // .then(newMockIngredObject => {
+            //     this.setState({ mockTagArray: newMockIngredObject.mock_tags })
+            // })
     }
 
     createMockIngredHandler(mockIngredObject) {
@@ -82,26 +101,28 @@ class ViewContainer extends React.Component {
     }
 
     filterMocktails = () => {
+        console.log(this.state.arrayOfMocktails[0])
         let filteredMocktails = [...this.state.arrayOfMocktails]
-        if (this.state.searchValue !== "") {
-            filteredMocktails = filteredMocktails.filter(mocktail => mocktail.name.toLowerCase().includes(this.state.searchValue.toLowerCase()) || mocktail.ingredient.name.toLowerCase().includes(this.state.searchValue.toLowerCase())
+        if (this.props.searchValue !== "") {
+            filteredMocktails = filteredMocktails.filter(mocktail => mocktail.name.toLowerCase().includes(this.props.searchValue.toLowerCase()) 
             )
             return filteredMocktails
         } else {
             return filteredMocktails
         }
     }
+    // || mocktail.ingredients.name.toLowerCase().includes(this.props.searchValue.toLowerCase())
 
     favClickHandler = (mocktailObject) => {
         this.setState({ selectedCard: mocktailObject, favBeenClicked: !this.state.favBeenClicked })
     }
 
     render() {
+        console.log(this.state.userArray)
         return (
             <Wrapper className="view-container">
-                <MyContainer createMocktailHandler={this.createMocktailHandler} ingredientArray={this.state.ingredientArray} measurementArray={this.state.measurementArray} tagArray={this.state.tagsArray} userArray={this.state.userArray} />
                 <MocktailContainer mocktailArray={this.filterMocktails()} mockIngredArray={this.state.mockIngredArray} />
-                
+                <MyContainer createMocktailHandler={this.createMocktailHandler} ingredientArray={this.state.ingredientArray} measurementArray={this.state.measurementArray} tagArray={this.state.tagsArray} userArray={this.state.userArray} mocktailObject={this.state.mocktailObject} />
             </Wrapper>
         )
     }

@@ -32,12 +32,15 @@ class CardFront extends React.Component {
 }
 export default CardFront
 
-
+const CardDiv = styled.div `
+    
+`
 
 const Image = styled.img`
     object-fit: contain;
-  max-width: 95%;
-  max-height: 275px; 
-  border: 3px solid #f819ae;
-  justify-content: center;
+    max-width: 95%;
+    max-height: 275px; 
+    border: 6px solid #fec196;
+    border-style: inset; 
+    justify-content: center;
 `

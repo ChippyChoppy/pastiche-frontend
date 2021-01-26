@@ -1,27 +1,36 @@
 import React from 'react'
 import CardFront from './CardFront'
 import CardBack from './CardBack'
+import CardNote from './CardNote'
 import styled from 'styled-components'
 
 class MocktailCard extends React.Component {
     state = {
-        beenClicked: false
+        beenClicked: false,
+        hover: false
     }
 
     renderMocktailCard = () => {
-        if (this.state.beenClicked) {
+        if (this.state.hover && this.state.beenClicked) {
+            return (
+                <CardNote 
+                    cardClickHandler={this.cardClickHandler} />
+            )
+        } 
+        if (this.state.hover && !this.state.beenClicked) {
             return (
                 <CardBack
-                    beenClicked={this.state}
+                    beenClicked={this.state.beenClicked}
                     cardClickHandler={this.cardClickHandler}
                     mocktailObject={this.props.mocktail}
                     mockIngredArray={this.props.mockIngredArray}
                 />
             )
-        } else {
+        } 
+        else {
             return (
                 <CardFront
-                    beenClicked={this.state}
+                    beenClicked={this.state.beenClicked}
                     cardClickHandler={this.cardClickHandler}
                     mocktailObject={this.props.mocktail}
                 />
@@ -40,7 +49,11 @@ class MocktailCard extends React.Component {
     render() {
         // console.log(this.props)
         return (
-            <Card className="mocktail-card" >
+            <Card
+                onMouseEnter={() => this.setState({hover: true})} 
+                onMouseLeave={() => this.setState({beenClicked: false, hover: false})}
+                onClick={this.cardClickHandler}
+                className="mocktail-card" >
                 {this.renderMocktailCard()}
             </Card>
 
@@ -51,14 +64,18 @@ class MocktailCard extends React.Component {
 export default MocktailCard
 
 const Card = styled.div`
-    display: inline;
-    justify-content: space-evenly;
+    flex-basis: auto;
     padding: 15px 15px;
-    margin: 10px 0px;
+    margin: 10px 10px;
     text-align: left;
     color: black;
-    border-radius: 0px;
-    border: 3px solid #dddd22;
-    width: 40%;
-    background: lightgrey;
-`
+    border-radius: 8px;
+    border: 10px solid #fec196;
+    border-style: inset;
+    width: 25%;
+    background: #480a1b;
+    color: #fefbfa;
+    :hover {
+        border-style: outset;
+    }
+`;
