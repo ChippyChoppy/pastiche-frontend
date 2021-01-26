@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import {GiHeartBottle} from 'react-icons/gi'
 
 class CardBack extends React.Component {
@@ -25,7 +26,7 @@ class CardBack extends React.Component {
         return (
             <div className="card-back" onClick={this.localClickHandler} >
                 <h3>{this.props.mocktailObject.name} Recipe</h3>
-                <GiHeartBottle />
+                <FavBottle><GiHeartBottle /></FavBottle>
                 <p>by: {this.props.mocktailObject.creator}</p>
                 <p>glassware: {this.props.mocktailObject.glassware}</p>
                 <h5>Ingredients:</h5>
@@ -51,3 +52,7 @@ class CardBack extends React.Component {
     }
 }
 export default CardBack
+
+const FavBottle = styled.p `
+    height: 15px;
+`
