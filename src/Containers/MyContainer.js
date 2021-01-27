@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const MyContainer = (props) => {
     {/* <RandDCard key={mocktail.id} mocktail={mocktail} /> */ }
-    console.log(props)
+    // console.log(props)
 
     return (
         <Wrapper className="mocktail-container">

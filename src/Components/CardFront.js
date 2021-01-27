@@ -7,7 +7,7 @@ class CardFront extends React.Component {
     renderCardFront = () => {
         // console.log(this.props)
         return (
-            <div className="card-front" onClick={this.localClickHandler} >
+            <div className="card-front"  >
                 <div>
                     <Image className="mocktail-img" alt={this.props.mocktailObject.name} src={this.props.mocktailObject.image} onMouseEnter={this.props.onMouseEnter} />
                     <h3>{this.props.mocktailObject.name}</h3>
@@ -17,14 +17,15 @@ class CardFront extends React.Component {
                     <Rating
                         initialRating={this.props.mocktailObject.rating}
                     />
+                    {/* // add an onclick to Rating with setState for rating, probably have to change rating to state further up to make this change, but whatevs, we'll get there*/}
                 </div>
             </div>
         )
     }
 
-    localClickHandler = () => {
-        this.props.cardClickHandler()
-    }
+    // localClickHandler = () => {
+    //     this.props.cardClickHandler()
+    // } onClick={this.localClickHandler}
 
     render() {
         return (

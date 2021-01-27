@@ -4,7 +4,7 @@ import Buttons from '../Components/Buttons'
 import styled from 'styled-components'
 
 const ProfileSidebar = (props) => {
-    console.log(props)
+    // console.log(props)
 
     return (
         <SideBar>

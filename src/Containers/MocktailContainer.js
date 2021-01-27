@@ -7,19 +7,26 @@ const MocktailContainer = (props) => {
     {/* <RandDCard key={mocktail.id} mocktail={mocktail} /> */ }
 
     return (
-        <MockContainer className="mocktail-container">
+        <StyledMockContainer className="mocktail-container">
             {props.mocktailArray.map((mocktail) => {
                 return (
-                    <MocktailCard key={mocktail.id} mocktail={mocktail} usersArray={props.usersArray} mockIngredArray={props.mockIngredArray} submitHandler={props.submitHandler} />
+                    <MocktailCard 
+                        key={mocktail.id} 
+                        mocktail={mocktail} 
+                        notesArray={props.notesArray} 
+                        mockIngredArray={props.mockIngredArray} 
+                        noteSubmitHandler={props.noteSubmitHandler} 
+                        favoriteSubmitHandler={props.favoriteSubmitHandler}
+                    />
                 )
             })}
-        </MockContainer>
+        </StyledMockContainer>
     )
 }
 
 export default MocktailContainer
 
-const MockContainer = styled.div `
+const StyledMockContainer = styled.div `
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

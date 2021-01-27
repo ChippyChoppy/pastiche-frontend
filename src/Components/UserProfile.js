@@ -18,7 +18,7 @@ class UserProfile extends React.Component {
         )
     }
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <ProfileWrapper>
                 <h2>user profile</h2>

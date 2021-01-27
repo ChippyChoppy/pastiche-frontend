@@ -1,51 +1,77 @@
 import React from 'react'
 import styled from 'styled-components'
-import {GiHeartBottle} from 'react-icons/gi'
+import {
+    AwesomeButton,
+    AwesomeButtonProgress,
+    AwesomeButtonSocial,
+} from 'react-awesome-button'
 
 class CardBack extends React.Component {
-
-    localClickHandler = () => {
-        this.props.cardClickHandler()
+    state = {
+        user_id: 1,
+        mocktail_id: this.props.mocktailObject.id,
+        r_and_d: true,
+        favorite: false
     }
 
     renderIngredientList = () => {
         return (
             this.props.mockIngredArray.map((mockIngred) => {
                 if (this.props.mocktailObject.id === mockIngred.mocktail.id) {
-                    return (<ul>
+                    return (<IngredientList>
                         <li>{mockIngred.measurement.imperial} / {mockIngred.measurement.metric} <b>{mockIngred.ingredient.name}</b></li>
-                    </ul>
+                    </IngredientList>
                     )
                 }
-
             })
         )
     }
 
-    renderMainCardBack = () => {
-        return (
-            <div className="card-back" onClick={this.localClickHandler} >
-                <h3>{this.props.mocktailObject.name} Recipe</h3>
-                <GiHeartBottle />
-                <p>by: {this.props.mocktailObject.creator}</p>
-                <p>glassware: {this.props.mocktailObject.glassware}</p>
-                <h5>Ingredients:</h5>
-                {this.renderIngredientList()}
-                <p>{this.props.mocktailObject.about}</p>
-                <p>{this.props.mocktailObject.instructions}</p>
-            </div>
-        )
+    localClickHandler = () => {
+        this.props.cardClickHandler()
     }
 
+    favoriteSetter = () => {
+        this.setState({ favorite: true })
+    }
 
+    localFavoriteSubmitHandler = (e) => {
+        e.preventDefault()
+        let favoriteObject = this.state
+        this.props.favoriteSubmitHandler(favoriteObject)
+    }
 
+    renderMainCardBack = () => {
+        if (this.state.favorite) {
+            return (
+                <div className="card-back" >
+                    <h3>{this.props.mocktailObject.name}</h3>
+                    <p><StyledB>Created by:</StyledB> {this.props.mocktailObject.creator} <br />
+                        <StyledB>Glassware:</StyledB> {this.props.mocktailObject.glassware} </p>
+                    <StyledB>Ingredients:</StyledB>
+                    {this.renderIngredientList()}
+                    <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
+                    <button onClick={this.localClickHandler}  >Notes</button>
+                </div>
+            )
+        } else {
+            return (
+                <div className="card-back" >
+                    <h3>{this.props.mocktailObject.name}</h3>
+                    <p><StyledB>Created by:</StyledB> {this.props.mocktailObject.creator} <br />
+                        <StyledB>Glassware:</StyledB> {this.props.mocktailObject.glassware} </p>
+                    <StyledB>Ingredients:</StyledB>
+                    {this.renderIngredientList()}
+                    <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
+                    <input type="submit" onClick={this.localFavoriteSubmitHandler, this.favoriteSetter}  value="Add to Favorites"/>
+                </div>
+            )
 
-    // console.log(mocktailItem)
-    // console.log(this.props.mocktailObject.ingredients)
-    // if (mocktailItem.ingredient_id === this.props.mocktailObject.ingredients.id && mocktailItem.measurement_id === this.props.mocktailObject.measurements.id) {
-    //     return <li>{this.props.mocktailObject.measurements.imperial}/{this.props.mocktailObject.measurements.metric} <b>{this.props.mocktailObject.ingredients.name}</b></li>
-    // }
+        }
+    }
+
     render() {
+        console.log(this.state.favorite)
         return (
             <div>{this.renderMainCardBack()}</div>
         )
@@ -53,6 +79,11 @@ class CardBack extends React.Component {
 }
 export default CardBack
 
-const FavBottle = styled.p `
-    height: 15px;
+const StyledB = styled.b`
+    color: #d9919a;
+`
+const IngredientList = styled.ul`
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 `

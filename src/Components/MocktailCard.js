@@ -7,29 +7,37 @@ import styled from 'styled-components'
 class MocktailCard extends React.Component {
     state = {
         beenClicked: false,
-        hover: false
+        hover: false,
+        favorite: false
     }
 
     renderMocktailCard = () => {
         if (this.state.hover && this.state.beenClicked) {
             return (
                 <CardNote
-                    cardClickHandler={this.cardClickHandler} />
+                    key={this.props.mocktail.id} 
+                    mocktailObject={this.props.mocktail}
+                    cardClickHandler={this.cardClickHandler} 
+                    noteSubmitHandler={this.props.noteSubmitHandler}
+                    notesArray={this.props.notesArray} />
             )
         }
         if (this.state.hover && !this.state.beenClicked) {
             return (
                 <CardBack
+                    key={this.props.mocktail.id} 
                     beenClicked={this.state.beenClicked}
                     cardClickHandler={this.cardClickHandler}
                     mocktailObject={this.props.mocktail}
                     mockIngredArray={this.props.mockIngredArray}
+                    favoriteSubmitHandler={this.props.favoriteSubmitHandler}
                 />
             )
         }
         else {
             return (
                 <CardFront
+                    key={this.props.mocktail.id} 
                     onMouseEnter={() => this.setState({ hover: true })}
                     hover={this.state.hover}
                     beenClicked={this.state.beenClicked}
@@ -44,22 +52,20 @@ class MocktailCard extends React.Component {
         this.setState({ beenClicked: !this.state.beenClicked })
     }
 
-    // localClickHandler = () => {
-    //     this.props.cardClickHandler()
-    // }
+    favoriteClickHandler = () => {
+        this.setState({ favorite: true })
+    }
 
     render() {
-        console.log(this.props.usersArray)
         return (
             <>
-                <Card
+                <StyledCard
                     // onMouseEnter={() => this.setState({hover: true})} 
                     onMouseLeave={() => this.setState({ beenClicked: false, hover: false })}
-                    onClick={this.cardClickHandler}
+                    cardClickHandler={this.cardClickHandler}
                     className="mocktail-card" >
                     {this.renderMocktailCard()}
-                </Card>
-                <CardNote submitHandler={this.props.submitHandler}/>
+                </StyledCard>
             </>
 
 
@@ -69,7 +75,7 @@ class MocktailCard extends React.Component {
 
 export default MocktailCard
 
-const Card = styled.div`
+const StyledCard = styled.div`
     flex-basis: auto;
     padding: 15px 15px;
     margin: 10px 10px;
