@@ -2,6 +2,7 @@ import React from 'react'
 import MocktailContainer from './MocktailContainer'
 import MyContainer from './MyContainer'
 import styled from 'styled-components'
+import { Switch, Route } from 'react-router-dom'
 
 class ViewContainer extends React.Component {
 
@@ -126,27 +127,29 @@ class ViewContainer extends React.Component {
 
     render() {
         return (
-            <div className="view-container">
-                <MocktailContainer
-                    notesArray={this.state.notesArray}
-                    mocktailArray={this.filterMocktails()}
-                    mockIngredArray={this.state.mockIngredArray}
-                    noteSubmitHandler={this.createNoteHandler}
-                    favoriteSubmitHandler={this.createFavoriteMocktail}
-                    usersMocktailArray={this.state.usersMocktailArray}
-                />
-                <MyContainer 
-                    createMocktailHandler={this.createMocktailHandler} 
-                    ingredientArray={this.state.ingredientArray} 
-                    measurementArray={this.state.measurementArray} 
-                    tagArray={this.state.tagsArray} 
-                    userArray={this.state.userArray} 
-                    mocktailObject={this.state.mocktailObject} />
-            </div>
+            <>
+                <Switch>
+                    <Route exact path='/profile' render={() => <MyContainer
+                        createMocktailHandler={this.createMocktailHandler}
+                        ingredientArray={this.state.ingredientArray}
+                        measurementArray={this.state.measurementArray}
+                        tagArray={this.state.tagsArray}
+                        userArray={this.state.userArray}
+                        mocktailObject={this.state.mocktailObject} />} />
+                    <Route path='/' render={() => <MocktailContainer
+                        notesArray={this.state.notesArray}
+                        mocktailArray={this.filterMocktails()}
+                        mockIngredArray={this.state.mockIngredArray}
+                        noteSubmitHandler={this.createNoteHandler}
+                        favoriteSubmitHandler={this.createFavoriteMocktail}
+                        usersMocktailArray={this.state.usersMocktailArray}
+                    />} />
+                </Switch>
+            </>
         )
-    
-    
-        
+
+
+
     }
 }
 

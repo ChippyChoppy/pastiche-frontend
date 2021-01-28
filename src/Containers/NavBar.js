@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PasticheHeader from './PasticheHeader.png'
+import { NavLink } from 'react-router-dom'
 // look into NavLink documentation for this
 
 class NavBar extends React.Component {
@@ -12,12 +13,9 @@ class NavBar extends React.Component {
         return (
             <div>
                 <Navigation>
-                    <Tab><NavLink>My Profile</NavLink></Tab>
-                    <Tab><NavLink>Mocktails</NavLink></Tab>
-                    <Tab><NavLink>R & D</NavLink></Tab>
-                    <Tab><NavLink>Pastiche</NavLink></Tab>
-                    <Tab><SearchBar
-                        
+                    <Tab><NavLink to='/profile'><StyledB>My Profile</StyledB></NavLink></Tab>
+                    <Tab><NavLink to='/'><StyledB>Mocktails</StyledB></NavLink></Tab>
+                    <Tab><SearchBar                        
                         id="search-bar"
                         type="text"
                         placeholder="Search"
@@ -33,7 +31,7 @@ class NavBar extends React.Component {
 
 export default NavBar
 
-const NavLink = styled.b`
+const StyledB = styled.b`
     color: #d9919a;
     display: block;
     padding: 25px; 
@@ -64,14 +62,14 @@ const Navigation = styled.ul`
     list-style-type: none;
     margin: 0;
     padding: 0;
-    ${'' /* height: 20%; */}
+    height: 20%;
     background: #052B38;
     color: white;
     text-align: center;
-    ${'' /* position: fixed; */}
+    position: fixed;
     top: 0;
     width: 100%;
-    ${'' /* background-image: url(${PasticheHeader}); */}
+    background-image: url(${PasticheHeader});
 `
 
 const SearchBar = styled.input`

@@ -3,6 +3,7 @@ import Header from './Containers/Header'
 import NavBar from './Containers/NavBar'
 import ViewContainer from './Containers/ViewContainer'
 import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 class App extends React.Component {
@@ -18,15 +19,17 @@ class App extends React.Component {
   }
 
   profileHandler = () => {
-    
+
   }
 
   render() {
     return (
       <div>
         {/* <Header /> */}
-        <NavBar searchValue={this.state.searchValue} searchHandler={this.searchHandler} profileClicked={this.state.profileClicked} allMocktailsClicked={this.state.allMocktailsClicked} rAndDClicked={this.state.rAndDClicked} searchClicked={this.state.searchClicked}  />
-        <ViewContainer searchValue={this.state.searchValue} />
+        <NavBar searchValue={this.state.searchValue} searchHandler={this.searchHandler} profileClicked={this.state.profileClicked} allMocktailsClicked={this.state.allMocktailsClicked} rAndDClicked={this.state.rAndDClicked} searchClicked={this.state.searchClicked} />
+        <Switch>
+          <Route path="/" render={() => <ViewContainer searchValue={this.state.searchValue} />} />
+        </Switch>
       </div>
     );
   }
