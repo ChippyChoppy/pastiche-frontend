@@ -91,7 +91,8 @@ const StyledCard = styled.div`
     width: 25%;
     background: #480a1b;
     color: #fefbfa;
-    transition: all 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;   
+    box-shadow: 0px 0px 15px 8px #900551;
     :hover {
         border-style: outset;
     }

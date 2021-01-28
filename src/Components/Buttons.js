@@ -5,13 +5,13 @@ const Buttons = () => {
 
     return (
         <div>
-            <Button>Create New Mocktail</Button>
-            <br />
-            <Button>Favorite Mocktails</Button>
-            <br />
-            <Button>My Mocktails</Button>
-            <br />
-            <Button>My Notebook</Button>
+            <Button><b>Create New Mocktail</b></Button>
+            <p />
+            <Button><b>Favorite Mocktails</b></Button>
+            <p />
+            <Button><b>My Mocktails</b></Button>
+            <p />
+            <Button><b>My Notebook</b></Button>
         </div>
 
     )
@@ -20,5 +20,15 @@ const Buttons = () => {
 export default Buttons
 
 const Button = styled.button `
-    background: pink;
+    background: #900551;
+    color: #fefbfa;
+    height: 40px;
+    border: 3px solid #fec196;
+    border-style: outset;
+    margin: 4px 15px;
+    box-shadow: 0px 0px 15px 4px #052b38;
+    :hover {
+        background: #052b38;
+    }
+    
 `

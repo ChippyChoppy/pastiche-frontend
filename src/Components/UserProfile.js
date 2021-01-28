@@ -6,12 +6,12 @@ class UserProfile extends React.Component {
     renderUserProfile = () => {
         return (
             <Profile>
-                <li>{this.props.user.first_name}</li>
+                <li><h1>{this.props.user.first_name}'s Profile</h1></li>
                 <ProfileImage alt={this.props.user.first_name} src={this.props.user.image} />
-                <li>
+                <li><p>
                     About: 
                     <br/>
-                    {this.props.user.bio}
+                    {this.props.user.bio}</p>
                 </li>
             </Profile>
 
@@ -21,7 +21,6 @@ class UserProfile extends React.Component {
         // console.log(this.props)
         return (
             <ProfileWrapper>
-                <h2>user profile</h2>
                 {this.renderUserProfile()}
             </ProfileWrapper>
         )
@@ -52,7 +51,12 @@ const Profile = styled.ul `
 `
 
 const ProfileImage = styled.img `
-    max-height: 175px;
+    max-height: 300px;
+    max-width: 90%
     object-fit: contain;
     justify-content: center;
+    border: 6px solid #fec196;
+    border-style: outset;
+    box-shadow: 0px 0px 15px 8px #052b38;
+
 `

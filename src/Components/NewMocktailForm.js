@@ -143,7 +143,7 @@ render() {
         </CreateDiv>
            <TheFormItself onSubmit={this.submitHandler}>
             <FormLabel>
-                Name: <br/>
+                <b>Name:</b> <br/>
                     <FormInput
                     type="text"
                     name="name"
@@ -153,7 +153,7 @@ render() {
             </FormLabel>
             <br />
             <FormLabel>
-                Created by: <br/>
+                <b>Created by: </b><br/>
                     <FormInput
                     type="text"
                     name="creator"
@@ -163,7 +163,7 @@ render() {
             </FormLabel>
             <br />
             <FormLabel>
-                Image: <br/>
+                <b>Image: </b><br/>
                     <FormInput
                     type="text"
                     name="image"
@@ -173,7 +173,7 @@ render() {
             </FormLabel>
             <br />
             <FormLabel>
-                Glassware: <br/>
+                <b>Glassware: </b><br/>
                     <FormInput
                     type="text"
                     name="glassware"
@@ -183,23 +183,23 @@ render() {
             </FormLabel>
             <br />
             <FormLabel>
-                Ingredients: 
+                <b>Ingredients: </b>
                     <br />
-                <select 
+                <IngredientDrop 
                     name="measurementId" 
                     onChange={this.mockIngredChangeHandler} >
                     {this.renderMeasurementList()}
-                </select>
-                <select
+                </IngredientDrop>
+                <IngredientDrop
                     name="ingredientId"
                     onChange={this.mockIngredChangeHandler}>
                     {this.renderIngredientList()}
-                </select>
-                <FormButton onClick={()=> this.renderMoreIngreds}>+ This button should render another measurement/ingredient dropdown+</FormButton>
+                </IngredientDrop>
+                <FormButton onClick={()=> this.renderMoreIngreds}>+ Add Ingredient +</FormButton>
             </FormLabel>
             <br />
             <FormLabel>
-                Instructions: <br/>
+                <b>Instructions: </b><br/>
                     <TextArea 
                         type="text" 
                         name="instructions"
@@ -208,7 +208,7 @@ render() {
                         onChange={this.changeHandler} />
             </FormLabel>
             <br />
-            <FormLabel>Tag: 
+            <FormLabel><b>Tag:</b> 
                     <br />
                 {this.renderTags()}
             </FormLabel>
@@ -227,10 +227,15 @@ const FormWrapper = styled.div `
     width: 70%;
     margin: 10px;
     padding: 20px;
-    border: 2px solid #fec196;
+    border: 12px solid #fec196;
+    border-radius: 8px;
+    border-style: outset;
+    box-shadow: 0px 0px 15px 8px #900551;
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    color: #fefbfa
 `
 
 const CreateDiv = styled.div `
@@ -240,6 +245,7 @@ const CreateDiv = styled.div `
 const TheFormItself = styled.form `
     border: 5px solid: #d9919a;
     padding: 5px;
+    
 `
 
 const TextArea = styled.textarea `
@@ -252,6 +258,9 @@ border-radius: 8px;
 border-style: inset;
 background-color: #fefbfa;
 resize: auto;
+box-shadow: 0px 0px 15px 8px #900551;
+margin: 10px 10px 10px 0px;
+
 `
 
 const FormInput = styled.input `
@@ -264,24 +273,42 @@ const FormInput = styled.input `
     border-radius: 8px;
     border-style: inset;
     background-color: #fefbfa;
+    box-shadow: 0px 0px 15px 8px #900551;
+
     :focus {
-        background-color: #480a1b;
-        color: #fefbfa;
+        color: #052b38;
         border: 5px solid #fec196;
         border-style: inset;
     }
 `
 const FormLabel = styled.label `
+margin: 10px 10px 10px 0px;
     
+`
+const IngredientDrop = styled.select `
+flex-basis: auto;
+    width: 35%;
+    padding: 12px 20px;
+    margin: 10px 10px 10px 0px;
+    box-sizing: border-box;
+    border: 5px solid #d9919a;
+    border-radius: 8px;
+    border-style: inset;
+    background-color: #fefbfa;
+    box-shadow: 0px 0px 15px 8px #900551;
+
 `
 
 const FormButton = styled.button `
-    background-color: #fec196;
-    border: 3px solid #d9919a;
-    margin: 5px;
+    background-color: #900551;
+    border: 3px solid #fec196;
+    color: #fefbfa;
+    margin: 10px 10px 10px 0px;
     border-radius: 8px;
     border-style: outset;
     padding: 8px;
+    box-shadow: 0px 0px 15px 8px #900551;
+
     :hover {
         background-color: #d9919a;
         border: 3px solid #fec196;

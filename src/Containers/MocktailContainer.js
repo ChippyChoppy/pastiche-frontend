@@ -33,7 +33,6 @@ const StyledMockContainer = styled.div `
     flex-direction: row;
     flex-wrap: wrap;
     height: 100%;
-    border: 3px solid gray;
     justify-content: space-evenly;
     align-content: space-around;
     overflow: scroll;

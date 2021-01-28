@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import PasticheHeader from './PasticheHeader.png'
 
 const Header = () => {
     return (
@@ -13,7 +12,6 @@ const Header = () => {
 export default Header
 
 const StyledHeader = styled.div `
-    background-image: url(${PasticheHeader})
     height: 20%;
     width: 100vw;
     position: fixed;

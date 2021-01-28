@@ -30,6 +30,10 @@ const SideBar = styled.ul `
     background: #d9919a;
     color: #fefbfa;
     border-radius: 8px;
+    border: 10px solid #fec196;
+    border-style: outset;
+    box-shadow: 0px 0px 15px 8px #900551;
+
     list-style-type: none;
     margin: 0;
     padding: 0;
