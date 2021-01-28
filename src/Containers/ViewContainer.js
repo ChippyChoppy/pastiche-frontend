@@ -135,17 +135,18 @@ class ViewContainer extends React.Component {
                     favoriteSubmitHandler={this.createFavoriteMocktail}
                     usersMocktailArray={this.state.usersMocktailArray}
                 />
-            </div>
-        )
-    
-    
-        {/* <MyContainer 
+                <MyContainer 
                     createMocktailHandler={this.createMocktailHandler} 
                     ingredientArray={this.state.ingredientArray} 
                     measurementArray={this.state.measurementArray} 
                     tagArray={this.state.tagsArray} 
                     userArray={this.state.userArray} 
-                    mocktailObject={this.state.mocktailObject} /> */}
+                    mocktailObject={this.state.mocktailObject} />
+            </div>
+        )
+    
+    
+        
     }
 }
 

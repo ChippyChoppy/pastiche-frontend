@@ -12,12 +12,12 @@ class NavBar extends React.Component {
         return (
             <div>
                 <Navigation>
-                    <Tab onClick=""><NavLink>My Profile</NavLink></Tab>
+                    <Tab><NavLink>My Profile</NavLink></Tab>
                     <Tab><NavLink>Mocktails</NavLink></Tab>
                     <Tab><NavLink>R & D</NavLink></Tab>
                     <Tab><NavLink>Pastiche</NavLink></Tab>
                     <Tab><SearchBar
-                        onSubmit=""
+                        
                         id="search-bar"
                         type="text"
                         placeholder="Search"

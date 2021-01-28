@@ -15,7 +15,11 @@ class CardNote extends React.Component {
 
     localSubmitHandler = (e) => {
         e.preventDefault()
-        let noteObject = { note: this.state.note, user_id: 1, users_mocktail_id: this.props.usersMocktailArray.id }
+        const variable = this.props.usersMocktailArray.find((mocktail) =>
+            mocktail.mocktail_id === this.props.mocktailObject.id
+        )
+        console.log(variable)
+        let noteObject = { note: this.state.note, user_id: 1, users_mocktail_id: variable.id }
         console.log("in create submit", noteObject)
         this.props.noteSubmitHandler(noteObject)
         this.setState({ addNoteClick: false })
@@ -26,10 +30,10 @@ class CardNote extends React.Component {
             this.props.notesArray.map((note) => {
                 console.log(note)
                 console.log(this.props)
-                if (this.props.mocktailObject.id === note.users_mocktail_id) {
+                if (this.props.mocktailObject.id === note.users_mocktail.mocktail_id) {
                     return (
                         <div>
-                            <p>{note.note} <button>Delete</button> </p>
+                            <p>{note.note} <button>X</button> </p>
                         </div>
                     )
                 }
@@ -58,7 +62,7 @@ class CardNote extends React.Component {
     }
 
     render() {
-        console.log(this.props)
+        console.log(this.props.mocktailObject.users_mocktails)
         return (
             <div>
                 {this.state.addNoteClick ? this.renderNoteWriter() : this.renderNote()}

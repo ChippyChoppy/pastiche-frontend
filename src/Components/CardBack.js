@@ -14,19 +14,19 @@ class CardBack extends React.Component {
     }
 
     favoriteSetter = () => {
-        this.setState({ favorite: true })
+        this.setState({ user_id: 1, mocktail_id: this.props.mocktailObject.id, r_and_d: true, favorite: true })
     }
 
     localFavoriteSubmitHandler = (e) => {
         e.preventDefault()
-        let favoriteObject = this.state
+        let favoriteObject = { user_id: 1, mocktail_id: this.props.mocktailObject.id, r_and_d: true, favorite: true }
         this.props.favoriteSubmitHandler(favoriteObject)
     }
 
     renderIngredientList = () => {
         return (
             this.props.mockIngredArray.map((mockIngred) => {
-                if (this.props.mocktailObject.id === mockIngred.mocktail.id) {
+                if (this.props.mocktailObject.id === mockIngred.mocktail_id) {
                     return (<IngredientList>
                         <li>{mockIngred.measurement.imperial} / {mockIngred.measurement.metric} <b>{mockIngred.ingredient.name}</b></li>
                     </IngredientList>
@@ -70,24 +70,32 @@ class CardBack extends React.Component {
         )
     }
 
-    // conditionallyRenderCardBack = () => {
-    //     if (this.props.mocktailObject.users_mocktails.length > 0) {
-    //         return (
-    //             this.renderFavoriteCardBack()
-    //         )
-    //     } else {
-    //             this.renderNotFavoriteCardBack()            
-    //     }
-    // }
+    conditionallyRenderCardBack = () => {
+        const variable = this.props.usersMocktailArray.find((mocktail) =>
+            mocktail.mocktail_id === this.props.mocktailObject.id
+        )
+        console.log(variable)
+        if (variable) {
+            return (
+                this.renderFavoriteCardBack()
+            )
+        } else {
+            return (
+                this.renderNotFavoriteCardBack()
+
+            )
+        }
+    }
 
     render() {
-        // console.log(this.props.mocktailObject.id)
-        // console.log(this.props)
-        // console.log(this.props.usersMocktailArray)
-        // console.log(this.props.usersMocktailArray[0].mocktail.id)
+        console.log(this.props.mocktailObject.id)
+        console.log(this.props)
+        console.log(this.props.usersMocktailArray)
+        console.log(this.props.usersMocktailArray[0].mocktail.id)
         return (
             <div>
-            {this.props.mocktailObject.users_mocktails.length > 0 ? this.renderFavoriteCardBack() : this.renderNotFavoriteCardBack()}
+                {this.conditionallyRenderCardBack()}
+                {/* {this.props.mocktailObject.users_mocktails.length > 0 ? this.renderFavoriteCardBack() : this.renderNotFavoriteCardBack()} */}
             </div>
         )
     }
