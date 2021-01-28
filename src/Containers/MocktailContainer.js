@@ -10,7 +10,6 @@ const MocktailContainer = (props) => {
     return (
         <StyledMockContainer className="mocktail-container">
             {props.mocktailArray.map((mocktail) => {
-                {/* console.log(mocktail.users_mocktails[0]) */}
                 return (
                     <MocktailCard 
                         key={mocktail.id} 

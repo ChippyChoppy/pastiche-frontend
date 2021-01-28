@@ -64,10 +64,10 @@ class CardNote extends React.Component {
                 {this.state.addNoteClick ? this.renderNoteWriter() : this.renderNote()}
                 <button onClick={() => this.setState({ addNoteClick: true })} >New Note</button>                
             </div>
-
         )
     }
 }
+
 {/* <h4>Notes:</h4>
                 <FormStyle onSubmit={this.localSubmitHandler} >
                     <TextAreaStyle name="note" value={this.state.note} onChange={this.noteChangeHandler} />

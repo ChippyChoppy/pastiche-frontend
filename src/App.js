@@ -17,6 +17,10 @@ class App extends React.Component {
     this.setState({ searchValue: e.target.value })
   }
 
+  profileHandler = () => {
+    
+  }
+
   render() {
     return (
       <div>

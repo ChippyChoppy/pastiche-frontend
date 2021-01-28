@@ -15,7 +15,7 @@ class MocktailCard extends React.Component {
         if (this.state.hover && this.state.beenClicked) {
             return (
                 <CardNote
-                    key={this.props.mocktail.id}
+                    key={this.props.key}
                     mocktailObject={this.props.mocktail}
                     cardClickHandler={this.cardClickHandler}
                     noteSubmitHandler={this.props.noteSubmitHandler}
@@ -27,7 +27,7 @@ class MocktailCard extends React.Component {
         if (this.state.hover && !this.state.beenClicked) {
             return (
                 <CardBack
-                    key={this.props.mocktail.id}
+                    key={this.props.key}
                     beenClicked={this.state.beenClicked}
                     cardClickHandler={this.cardClickHandler}
                     mocktailObject={this.props.mocktail}
@@ -41,7 +41,7 @@ class MocktailCard extends React.Component {
         else {
             return (
                 <CardFront
-                    key={this.props.mocktail.id}
+                    key={this.props.key}
                     onMouseEnter={() => this.setState({ hover: true })}
                     hover={this.state.hover}
                     beenClicked={this.state.beenClicked}

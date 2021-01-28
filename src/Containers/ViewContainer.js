@@ -124,31 +124,21 @@ class ViewContainer extends React.Component {
         }
     }
 
-    sendDownFavs = () => {
-        this.state.usersMocktailArray.map((fav) => {
-            let usersMocktail = fav
-            return usersMocktail
-        })
-    }
-
     render() {
         return (
-            this.state.usersMocktailArray.map((fav) => {
-                console.log(fav)
-                return (
-                    <div className="view-container">
-                        <MocktailContainer
-                            notesArray={this.state.notesArray}
-                            mocktailArray={this.filterMocktails()}
-                            mockIngredArray={this.state.mockIngredArray}
-                            noteSubmitHandler={this.createNoteHandler}
-                            favoriteSubmitHandler={this.createFavoriteMocktail}
-                            usersMocktailArray={fav}
-                        />
-                    </div>
-                )
-            })
+            <div className="view-container">
+                <MocktailContainer
+                    notesArray={this.state.notesArray}
+                    mocktailArray={this.filterMocktails()}
+                    mockIngredArray={this.state.mockIngredArray}
+                    noteSubmitHandler={this.createNoteHandler}
+                    favoriteSubmitHandler={this.createFavoriteMocktail}
+                    usersMocktailArray={this.state.usersMocktailArray}
+                />
+            </div>
         )
+    
+    
         {/* <MyContainer 
                     createMocktailHandler={this.createMocktailHandler} 
                     ingredientArray={this.state.ingredientArray} 

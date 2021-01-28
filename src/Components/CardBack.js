@@ -1,30 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-    AwesomeButton,
-    AwesomeButtonProgress,
-    AwesomeButtonSocial,
-} from 'react-awesome-button'
 
 class CardBack extends React.Component {
     state = {
         user_id: 1,
-        mocktail_id: this.props.mocktailObject.id,
+        mocktail_id: this.props.key,
         r_and_d: true,
-        favorite: false
-    }
-
-    renderIngredientList = () => {
-        return (
-            this.props.mockIngredArray.map((mockIngred) => {
-                if (this.props.mocktailObject.id === mockIngred.mocktail.id) {
-                    return (<IngredientList>
-                        <li>{mockIngred.measurement.imperial} / {mockIngred.measurement.metric} <b>{mockIngred.ingredient.name}</b></li>
-                    </IngredientList>
-                    )
-                }
-            })
-        )
+        favorite: true
     }
 
     localClickHandler = () => {
@@ -40,44 +22,77 @@ class CardBack extends React.Component {
         let favoriteObject = this.state
         this.props.favoriteSubmitHandler(favoriteObject)
     }
- // let favMocktails = this.props.usersMocktailArray.find((fav) => {
-        //     return fav.mocktail_id === this.props.mocktailObject.id
-        // })
-    renderFavoriteCardBack = () => {
-        if (this.props.usersMocktailArray) {
-            return (
-                <div className="card-back" >
-                    <h3>{this.props.mocktailObject.name}</h3>
-                    <p><StyledB>Created by:</StyledB> {this.props.mocktailObject.creator} <br />
-                        <StyledB>Glassware:</StyledB> {this.props.mocktailObject.glassware} </p>
-                    <StyledB>Ingredients:</StyledB>
-                    {this.renderIngredientList()}
-                    <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
-                    <button onClick={this.localClickHandler}  >Notes</button>
-                </div>
-            )
-        } else {
-            return (
-                <div className="card-back" >
-                    <h3>{this.props.mocktailObject.name}</h3>
-                    <p><StyledB>Created by:</StyledB> {this.props.mocktailObject.creator} <br />
-                        <StyledB>Glassware:</StyledB> {this.props.mocktailObject.glassware} </p>
-                    <StyledB>Ingredients:</StyledB>
-                    {this.renderIngredientList()}
-                    <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
-                    <input type="submit" onClick={this.localFavoriteSubmitHandler} value="Add to Favorites" />
-                </div>)
-        }
+
+    renderIngredientList = () => {
+        return (
+            this.props.mockIngredArray.map((mockIngred) => {
+                if (this.props.mocktailObject.id === mockIngred.mocktail.id) {
+                    return (<IngredientList>
+                        <li>{mockIngred.measurement.imperial} / {mockIngred.measurement.metric} <b>{mockIngred.ingredient.name}</b></li>
+                    </IngredientList>
+                    )
+                }
+            })
+        )
     }
 
-    render() {
-        console.log(this.props.mocktailObject.id)
-        console.log(this.props.usersMocktailArray)
+    renderFavoriteCardBack = () => {
         return (
-            <div>{this.renderFavoriteCardBack()}</div>
+            this.props.usersMocktailArray.map((favorite) => {
+                if (this.props.mocktailObject.id === favorite.mocktail.id) {
+                    return (
+                        <div className="card-back" >
+                            <h3>{this.props.mocktailObject.name}</h3>
+                            <p><StyledB>Created by:</StyledB> {this.props.mocktailObject.creator} <br />
+                                <StyledB>Glassware:</StyledB> {this.props.mocktailObject.glassware} </p>
+                            <StyledB>Ingredients:</StyledB>
+                            {this.renderIngredientList()}
+                            <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
+                            <button onClick={this.localClickHandler}  >Notes</button>
+                        </div>
+                    )
+                }
+            })
+        )
+    }
+
+    renderNotFavoriteCardBack = () => {
+        return (
+            <div className="card-back" >
+                <h3>{this.props.mocktailObject.name}</h3>
+                <p><StyledB>Created by:</StyledB> {this.props.mocktailObject.creator} <br />
+                    <StyledB>Glassware:</StyledB> {this.props.mocktailObject.glassware} </p>
+                <StyledB>Ingredients:</StyledB>
+                {this.renderIngredientList()}
+                <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
+                <button type="submit" onClick={this.localFavoriteSubmitHandler} value="Submit" >Add to favorites</button>
+            </div>
+        )
+    }
+
+    // conditionallyRenderCardBack = () => {
+    //     if (this.props.mocktailObject.users_mocktails.length > 0) {
+    //         return (
+    //             this.renderFavoriteCardBack()
+    //         )
+    //     } else {
+    //             this.renderNotFavoriteCardBack()            
+    //     }
+    // }
+
+    render() {
+        // console.log(this.props.mocktailObject.id)
+        // console.log(this.props)
+        // console.log(this.props.usersMocktailArray)
+        // console.log(this.props.usersMocktailArray[0].mocktail.id)
+        return (
+            <div>
+            {this.props.mocktailObject.users_mocktails.length > 0 ? this.renderFavoriteCardBack() : this.renderNotFavoriteCardBack()}
+            </div>
         )
     }
 }
+
 export default CardBack
 
 const StyledB = styled.b`
