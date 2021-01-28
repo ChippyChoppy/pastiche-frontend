@@ -6,9 +6,11 @@ import styled from 'styled-components'
 const MocktailContainer = (props) => {
     {/* <RandDCard key={mocktail.id} mocktail={mocktail} /> */ }
 
+
     return (
         <StyledMockContainer className="mocktail-container">
             {props.mocktailArray.map((mocktail) => {
+                {/* console.log(mocktail.users_mocktails[0]) */}
                 return (
                     <MocktailCard 
                         key={mocktail.id} 
@@ -17,6 +19,7 @@ const MocktailContainer = (props) => {
                         mockIngredArray={props.mockIngredArray} 
                         noteSubmitHandler={props.noteSubmitHandler} 
                         favoriteSubmitHandler={props.favoriteSubmitHandler}
+                        usersMocktailArray={props.usersMocktailArray}
                     />
                 )
             })}
@@ -30,8 +33,11 @@ const StyledMockContainer = styled.div `
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    height: 100%;
+    border: 3px solid gray;
     justify-content: space-evenly;
     align-content: space-around;
+    overflow: scroll;
 `;
 
 

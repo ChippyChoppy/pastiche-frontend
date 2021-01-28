@@ -5,28 +5,31 @@ class CardNote extends React.Component {
     state = {
         note: "",
         user_id: 1,
-        users_mocktail_id: this.props.mocktailObject.users_mocktails[0].id
+        users_mocktail_id: "",
+        addNoteClick: false
     }
 
     noteChangeHandler = (e) => {
-        this.setState({ note: e.target.value })
+        this.setState({ note: e.target.value  })
     }
 
     localSubmitHandler = (e) => {
         e.preventDefault()
-        let noteObject = this.state
+        let noteObject = { note: this.state.note, user_id: 1, users_mocktail_id: this.props.usersMocktailArray.id }
         console.log("in create submit", noteObject)
         this.props.noteSubmitHandler(noteObject)
+        this.setState({ addNoteClick: false })
     }
 
     renderNote = () => {
         return (
             this.props.notesArray.map((note) => {
-                if (this.props.mocktailObject.id === note.users_mocktail.mocktail_id) {
+                console.log(note)
+                console.log(this.props)
+                if (this.props.mocktailObject.id === note.users_mocktail_id) {
                     return (
                         <div>
-                            <p>{note.note}</p>
-                            <button onClick={this.renderNoteWriter} >New Note</button>
+                            <p>{note.note} <button>Delete</button> </p>
                         </div>
                     )
                 }
@@ -58,7 +61,8 @@ class CardNote extends React.Component {
         console.log(this.props)
         return (
             <div>
-                {this.renderNote()}
+                {this.state.addNoteClick ? this.renderNoteWriter() : this.renderNote()}
+                <button onClick={() => this.setState({ addNoteClick: true })} >New Note</button>                
             </div>
 
         )

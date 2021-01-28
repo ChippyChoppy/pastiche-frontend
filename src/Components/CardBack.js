@@ -40,9 +40,11 @@ class CardBack extends React.Component {
         let favoriteObject = this.state
         this.props.favoriteSubmitHandler(favoriteObject)
     }
-
-    renderMainCardBack = () => {
-        if (this.state.favorite) {
+ // let favMocktails = this.props.usersMocktailArray.find((fav) => {
+        //     return fav.mocktail_id === this.props.mocktailObject.id
+        // })
+    renderFavoriteCardBack = () => {
+        if (this.props.usersMocktailArray) {
             return (
                 <div className="card-back" >
                     <h3>{this.props.mocktailObject.name}</h3>
@@ -63,17 +65,16 @@ class CardBack extends React.Component {
                     <StyledB>Ingredients:</StyledB>
                     {this.renderIngredientList()}
                     <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
-                    <input type="submit" onClick={this.localFavoriteSubmitHandler, this.favoriteSetter}  value="Add to Favorites"/>
-                </div>
-            )
-
+                    <input type="submit" onClick={this.localFavoriteSubmitHandler} value="Add to Favorites" />
+                </div>)
         }
     }
 
     render() {
-        console.log(this.state.favorite)
+        console.log(this.props.mocktailObject.id)
+        console.log(this.props.usersMocktailArray)
         return (
-            <div>{this.renderMainCardBack()}</div>
+            <div>{this.renderFavoriteCardBack()}</div>
         )
     }
 }

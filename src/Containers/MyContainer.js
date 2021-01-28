@@ -19,7 +19,7 @@ const MyContainer = (props) => {
 export default MyContainer
 
 const Wrapper = styled.div `
-    height: 100vh;
+    height: 80%;
     width: 100vw;
     display: flex;
 `;

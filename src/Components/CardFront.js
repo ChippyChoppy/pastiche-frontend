@@ -12,8 +12,7 @@ class CardFront extends React.Component {
                     <Image className="mocktail-img" alt={this.props.mocktailObject.name} src={this.props.mocktailObject.image} onMouseEnter={this.props.onMouseEnter} />
                     <h3>{this.props.mocktailObject.name}</h3>
                     {this.props.mocktailObject.tags.map((mockTag) => { return <button>{mockTag.tag}</button> })}
-                </div>
-                <div>
+                    <br />
                     <Rating
                         initialRating={this.props.mocktailObject.rating}
                     />
@@ -29,14 +28,16 @@ class CardFront extends React.Component {
 
     render() {
         return (
-            <div>{this.renderCardFront()}</div>
+            <CardDiv>{this.renderCardFront()}</CardDiv>
         )
     }
 }
 export default CardFront
 
 const CardDiv = styled.div`
-    
+        flex-basis: auto;
+
+    transition: all 0.5s ease-in-out 0s;
 `
 
 const Image = styled.img`

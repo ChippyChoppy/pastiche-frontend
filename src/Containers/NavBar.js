@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PasticheHeader from './PasticheHeader.png'
 // look into NavLink documentation for this
 const NavBar = (props) => {
     return (
@@ -28,22 +29,38 @@ const NavLink = styled.b `
     color: #d9919a;
     display: block;
     padding: 25px; 
-    display: inline;   
+    display: inline;    
+    bottom: 10px;
+   
 `
-const Tab = styled.li `
+const Tab = styled.a `
     display: inline;
+`
+
+const Wrapper = styled.div `
+height: 20%;
+position: fixed;
+top: 0;
+width: 100%;
+border: 3px solid white;
+overflow: hidden;
+    :hover {
+        color: #fec196;
+    }
 `
 
 const Navigation = styled.ul `
     list-style-type: none;
     margin: 0;
     padding: 0;
+    ${'' /* height: 20%; */}
     background: #052B38;
     color: white;
     text-align: center;
-    position: fixed;
+    ${'' /* position: fixed; */}
     top: 0;
     width: 100%;
+    ${'' /* background-image: url(${PasticheHeader}); */}
 `
 
 const SearchBar = styled.input `

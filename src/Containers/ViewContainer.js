@@ -56,11 +56,11 @@ class ViewContainer extends React.Component {
         fetch('http://localhost:3000/api/v1/users_mocktails')
             .then(response => response.json())
             .then(allFavorites => {
-                this.setState({ usersMocktailArray: allFavorites})
+                this.setState({ usersMocktailArray: allFavorites })
             })
     }
 
-    createMocktailHandler(mocktailObject) {
+    createMocktailHandler = (mocktailObject) => {
         console.log(mocktailObject)
         fetch('http://localhost:3000/api/v1/mocktails', {
             method: 'POST',
@@ -91,6 +91,7 @@ class ViewContainer extends React.Component {
                 console.log(newNoteObject)
                 console.log(this.state.notesArray)
                 this.setState({ notesArray: [...this.state.notesArray, newNoteObject] })
+                console.log(this.state.notesArray)
             })
     }
 
@@ -106,7 +107,8 @@ class ViewContainer extends React.Component {
             .then(response => response.json())
             .then(newFavoriteObject => {
                 console.log(newFavoriteObject)
-                this.setState({ usersMocktailArray: [...this.state.usersMocktailArray, newFavoriteObject ] })
+                this.setState({ usersMocktailArray: [...this.state.usersMocktailArray, newFavoriteObject] })
+                console.log(this.state.usersMocktailArray)
             })
     }
 
@@ -122,32 +124,48 @@ class ViewContainer extends React.Component {
         }
     }
 
+    sendDownFavs = () => {
+        this.state.usersMocktailArray.map((fav) => {
+            let usersMocktail = fav
+            return usersMocktail
+        })
+    }
+
     render() {
         return (
-            <Wrapper className="view-container">
-                <MocktailContainer 
-                    notesArray={this.state.notesArray} 
-                    mocktailArray={this.filterMocktails()} 
-                    mockIngredArray={this.state.mockIngredArray} 
-                    noteSubmitHandler={this.createNoteHandler}
-                    favoriteSubmitHandler={this.createFavoriteMocktail} 
-                    />
-                <MyContainer 
+            this.state.usersMocktailArray.map((fav) => {
+                console.log(fav)
+                return (
+                    <div className="view-container">
+                        <MocktailContainer
+                            notesArray={this.state.notesArray}
+                            mocktailArray={this.filterMocktails()}
+                            mockIngredArray={this.state.mockIngredArray}
+                            noteSubmitHandler={this.createNoteHandler}
+                            favoriteSubmitHandler={this.createFavoriteMocktail}
+                            usersMocktailArray={fav}
+                        />
+                    </div>
+                )
+            })
+        )
+        {/* <MyContainer 
                     createMocktailHandler={this.createMocktailHandler} 
                     ingredientArray={this.state.ingredientArray} 
                     measurementArray={this.state.measurementArray} 
                     tagArray={this.state.tagsArray} 
                     userArray={this.state.userArray} 
-                    mocktailObject={this.state.mocktailObject} />
-            </Wrapper>
-        )
+                    mocktailObject={this.state.mocktailObject} /> */}
     }
 }
 
 export default ViewContainer
 
 const Wrapper = styled.div`
-    height: 100vh;
+    height: 75%;
     width: 100vw;
     display: flex;
+    border: 3px solid pink;
+    position: fixed;
+    bottom: 0px;
 `;
