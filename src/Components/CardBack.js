@@ -24,9 +24,11 @@ class CardBack extends React.Component {
     }
 
     renderIngredientList = () => {
+        console.log(this.props.mocktailObject.id)
         return (
             this.props.mockIngredArray.map((mockIngred) => {
-                if (this.props.mocktailObject.id === mockIngred.mocktail_id) {
+                console.log(mockIngred)
+                if (this.props.mocktailObject.id === mockIngred.mocktail.id) {
                     return (<IngredientList>
                         <li>{mockIngred.measurement.imperial} / {mockIngred.measurement.metric} <b>{mockIngred.ingredient.name}</b></li>
                     </IngredientList>
@@ -48,7 +50,7 @@ class CardBack extends React.Component {
                             <StyledB>Ingredients:</StyledB>
                             {this.renderIngredientList()}
                             <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
-                            <button onClick={this.localClickHandler}  >Notes</button>
+                            <Button onClick={this.localClickHandler}  >Notes</Button>
                         </div>
                     )
                 }
@@ -65,7 +67,7 @@ class CardBack extends React.Component {
                 <StyledB>Ingredients:</StyledB>
                 {this.renderIngredientList()}
                 <p><StyledB>Instructions:</StyledB>{this.props.mocktailObject.instructions}</p>
-                <button type="submit" onClick={this.localFavoriteSubmitHandler} value="Submit" >Add to favorites</button>
+                <Button type="submit" onClick={this.localFavoriteSubmitHandler} value="Submit" >Add to favorites</Button>
             </div>
         )
     }
@@ -110,4 +112,17 @@ const IngredientList = styled.ul`
     list-style-type: none;
     margin: 0;
     padding: 0;
+`
+
+const Button = styled.button `
+    background: #900551;
+    color: #fefbfa;
+    height: 40px;
+    border: 3px solid #fec196;
+    border-style: outset;
+    margin: 15px 10px 15px 0px;
+    box-shadow: 0px 0px 15px 4px #d9919a;
+    :hover {
+        background: #052b38;
+    }
 `

@@ -33,7 +33,7 @@ class CardNote extends React.Component {
                 if (this.props.mocktailObject.id === note.users_mocktail.mocktail_id) {
                     return (
                         <div>
-                            <p>{note.note} <button>X</button> </p>
+                            <p>{note.note} <Button>X</Button> </p>
                         </div>
                     )
                 }
@@ -52,7 +52,7 @@ class CardNote extends React.Component {
                         value={this.state.note}
                         onChange={this.noteChangeHandler} />
                     <div>
-                        <input
+                        <Input
                             type="submit"
                             value="Submit" />
                     </div>
@@ -66,7 +66,7 @@ class CardNote extends React.Component {
         return (
             <div>
                 {this.state.addNoteClick ? this.renderNoteWriter() : this.renderNote()}
-                <button onClick={() => this.setState({ addNoteClick: true })} >New Note</button>                
+                <Button onClick={() => this.setState({ addNoteClick: true })} >New Note</Button>                
             </div>
         )
     }
@@ -90,4 +90,30 @@ const TextAreaStyle = styled.textarea`
 
 const FormStyle = styled.form`
     justify-content: center;
+`
+
+const Button = styled.button `
+    background: #900551;
+    color: #fefbfa;
+    height: 40px;
+    border: 3px solid #fec196;
+    border-style: outset;
+    margin: 15px 10px 15px 0px;
+    box-shadow: 0px 0px 15px 4px #d9919a;
+    :hover {
+        background: #052b38;
+    }
+`
+
+const Input = styled.input `
+    background: #900551;
+    color: #fefbfa;
+    height: 40px;
+    border: 3px solid #fec196;
+    border-style: outset;
+    margin: 15px 10px 15px 0px;
+    box-shadow: 0px 0px 15px 4px #d9919a;
+    :hover {
+        background: #052b38;
+    }
 `

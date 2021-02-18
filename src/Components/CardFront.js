@@ -64,5 +64,4 @@ const Button = styled.button `
     :hover {
         background: #052b38;
     }
-    
 `
